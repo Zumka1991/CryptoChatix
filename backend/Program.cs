@@ -31,20 +31,17 @@ builder.Services.AddSingleton<PasswordStorage>();
 
 var app = builder.Build();
 
-// Use CORS in development
-if (app.Environment.IsDevelopment())
-{
-    app.UseCors("AllowFrontend");
-}
-
-// Map SignalR hub
-app.MapHub<ChatHub>("/chatHub");
-
-// Serve static files for production
+// Serve static files for production (before CORS and routing)
 if (app.Environment.IsProduction())
 {
     app.UseDefaultFiles();
     app.UseStaticFiles();
 }
+
+// Use CORS (needed for WebSocket connections)
+app.UseCors("AllowFrontend");
+
+// Map SignalR hub
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
