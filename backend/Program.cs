@@ -15,10 +15,11 @@ builder.Services.AddCors(options =>
         }
         else
         {
-            // Production: allow any origin (frontend served from same origin)
-            policy.AllowAnyOrigin()
+            // Production: allow any origin with credentials (needed for SignalR)
+            policy.SetIsOriginAllowed(_ => true)
                   .AllowAnyHeader()
-                  .AllowAnyMethod();
+                  .AllowAnyMethod()
+                  .AllowCredentials();
         }
     });
 });
