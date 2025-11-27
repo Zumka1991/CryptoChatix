@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+wwwroot/
+
+# User-specific files
+*.user
+*.suo
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Password storage
+passwords.json

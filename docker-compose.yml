@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  cryptochatix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+    volumes:
+      - passwords-data:/app/passwords
+    restart: unless-stopped
+    container_name: cryptochatix-app
+
+volumes:
+  passwords-data:
+    driver: local
+
+networks:
+  default:
+    name: cryptochatix-network
